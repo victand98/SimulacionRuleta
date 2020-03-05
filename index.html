@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Exámen 3</title>
+  <title>Ruleta</title>
   <link rel="stylesheet" href="./css/bootstrap.min.css">
   <link rel="stylesheet" href="./css/index.css">
 </head>
@@ -12,14 +12,96 @@
 
   <div class="container">
     <header class="my-3">
-      <h3 class="text-center">Exámen 3</h3>
+      <h3 class="text-center">Ruleta</h3>
       <h6 class="text-center">Simulación</h6>
     </header>
     <div class="row">
       <div class="col-md-10 mx-auto">
-        <form id="form">
-          <input type="submit" class="btn btn-primary" value="Empezar">
-        </form>
+        <div class="card">
+          <div class="card-header">
+            <b>Ingreso de Datos</b>
+          </div>
+          <div class="card-body">
+            <form id="form">
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="juego1">Apostar por Rojo o Negro</label>
+                  <select name="juego1" id="juego1" class="form-control">
+                    <option value="1">Apostar al Rojo</option>
+                    <option value="2">Apostar al Negro</option>
+                  </select>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="juego2">Apostar un número</label>
+                  <select name="juego2" id="juego2" class="form-control">
+                    <option value="0">0</option>
+                    <option value="37">00</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                    <option value="25">25</option>
+                    <option value="26">26</option>
+                    <option value="27">27</option>
+                    <option value="28">28</option>
+                    <option value="29">29</option>
+                    <option value="30">30</option>
+                    <option value="31">31</option>
+                    <option value="32">32</option>
+                    <option value="33">33</option>
+                    <option value="34">34</option>
+                    <option value="35">35</option>
+                    <option value="36">36</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="juego3">Sistema de martingala</label>
+                  <select name="juego3" id="juego3" class="form-control">
+                    <option value="1">Apostar al Rojo</option>
+                    <option value="2">Apostar al Negro</option>
+                  </select>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="juego4">Sistema Labouchere</label>
+                  <select name="juego4" id="juego4" class="form-control">
+                    <option value="1">Apostar al Rojo</option>
+                    <option value="2">Apostar al Negro</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="repeticiones">Repeticiones</label>
+                  <input type="number" class="form-control" id="repeticiones" name="repeticiones" min="1"
+                    placeholder="Número de repeticiones de la simulación">
+                </div>
+              </div>
+              <input type="submit" class="btn btn-primary" value="Empezar">
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -29,6 +111,7 @@
   <script src="./js/bootstrap.min.js"></script>
   <script src="./js/popper.min.js"></script>
   <script src="./js/index.js"></script>
+  <script src="./js/utils.js"></script>
 </body>
 
 </html>
