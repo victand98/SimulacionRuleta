@@ -7,17 +7,20 @@ $().ready(function () {
         var juego4 = parseInt($('#juego4').val());
         var repeticiones = parseInt($('#repeticiones').val());
 
-        var apuesta1 = juego1 === 1 ? apuestaRojoNegro(rojas) : apuestaRojoNegro(negras);
-        console.log('\n1. Apuesta al Rojo o Negro\n', apuesta1);
+        var resultado1 = obtenerResultado(repeticiones,
+            () => juego1 === 1 ? apuestaRojoNegro(rojas) : apuestaRojoNegro(negras));
+        console.log('\n1. Apuesta al Rojo o Negro\n', resultado1);
 
-        var apuesta2 = apuestaUnNumero(juego2);
-        console.log('2. Apuesta un Número\n', apuesta2);
+        var resultado2 = obtenerResultado(repeticiones, () => apuestaUnNumero(juego2));
+        console.log('2. Apuesta un Número\n', resultado2);
 
-        var apuesta3 = juego3 === 1 ? apuestaMartingala(rojas) : apuestaMartingala(negras);
-        console.log('3. Apuesta de Martingala\n', apuesta3);
+        var resultado3 = obtenerResultado(repeticiones,
+            () => juego3 === 1 ? apuestaMartingala(rojas) : apuestaMartingala(negras));
+        console.log('3. Apuesta de Martingala\n', resultado3);
 
-        var apuesta4 = juego4 === 1 ? apuestaLabouchere(rojas) : apuestaLabouchere(negras);
-        console.log('4. Apuesta de Labouchere\n', apuesta4);
+        var resultado4 = obtenerResultado(repeticiones,
+            () => juego4 === 1 ? apuestaLabouchere(rojas) : apuestaLabouchere(negras));
+        console.log('4. Apuesta de Labouchere\n', resultado4);
     });
 });
 
@@ -75,7 +78,20 @@ function apuestaMartingala(conjunto) {
 
 // 4. Apuesta mediante el sistema de Labouchere
 function apuestaLabouchere(conjunto) {
-    // Codigo aquí
+    // Código aquí
 
     return { ganancia: 0, nroApuestas: 0 }
+}
+
+
+/*
+    Obteniendo los resultados de la ejecución
+    de los distintos tipos de juego
+*/
+
+function obtenerResultado(repeticiones, func) {
+    var result = [];
+    for (let i = 0; i < repeticiones; i++)
+        result.push(func());
+    return result;
 }

@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Ruleta</title>
+  <link rel="icon" type="image/svg+xml" href="./img/ruleta.svg" sizes="any">
   <link rel="stylesheet" href="./css/bootstrap.min.css">
   <link rel="stylesheet" href="./css/index.css">
 </head>
@@ -95,7 +96,7 @@
                 <div class="form-group col-md-6">
                   <label for="repeticiones">Repeticiones</label>
                   <input type="number" class="form-control" id="repeticiones" name="repeticiones" min="1"
-                    placeholder="Número de repeticiones de la simulación">
+                    placeholder="Número de repeticiones de la simulación" value="1">
                 </div>
               </div>
               <input type="submit" class="btn btn-primary" value="Empezar">
@@ -103,6 +104,151 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="row">
+      <!-- Juego 1 -->
+      <div class="col-xs-12 col-sm-6 col-md-4 offset-md-2 my-3">
+        <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+          <div class="mainflip">
+            <div class="frontside">
+              <div class="card">
+                <div class="card-body text-center">
+                  <p><img class=" img-fluid" src="./img/ruleta.jpg" alt="card image">
+                  </p>
+                  <h4 class="card-title">Apuesta al Rojo o Negro</h4>
+                  <p class="card-text">
+                    Este juego implica solo una apuesta. Apuestas $ 1 al rojo o al negro.
+                    Si la pelota cae en las ranuras elegidas ganas $ 1,
+                    de lo contrario pierdes.
+                  </p>
+                  <a href="#" class="btn btn-primary btn-sm"></a>
+                </div>
+              </div>
+            </div>
+            <div class="backside">
+              <div class="card">
+                <div class="card-body text-center mt-4">
+                  <h4 class="card-title">Apuesta al Rojo o Negro</h4>
+                  <h6 class="card-title">Resultados</h6>
+                  <p class="card-text" id="resultado1">Aún no hay resultados del juego. En el formulario de la parte
+                    superior ingrese los valores para empezar a ejecutar el juego.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ./Juego 1 -->
+
+      <!-- Juego 2 -->
+      <div class="col-xs-12 col-sm-6 col-md-4 my-3">
+        <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+          <div class="mainflip">
+            <div class="frontside">
+              <div class="card">
+                <div class="card-body text-center">
+                  <p><img class=" img-fluid" src="./img/ruleta.jpg" alt="card image">
+                  </p>
+                  <h4 class="card-title">Apuesta un número</h4>
+                  <p class="card-text">
+                    Este juego implica solo una apuesta. Apuesta $ 1 en un número particular.
+                    Si la bola cae en ese número, ganas $ 35, de lo contrario pierdes.
+                  </p>
+                  <a href="#" class="btn btn-primary btn-sm"></a>
+                </div>
+              </div>
+            </div>
+            <div class="backside">
+              <div class="card">
+                <div class="card-body text-center mt-4">
+                  <h4 class="card-title">Apuesta un número</h4>
+                  <h6 class="card-title">Resultados</h6>
+                  <p class="card-text" id="resultado2">Aún no hay resultados del juego. En el formulario de la parte
+                    superior ingrese los valores para empezar a ejecutar el juego.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ./Juego 2 -->
+
+      <!-- Juego 3 -->
+      <div class="col-xs-12 col-sm-6 col-md-4 offset-md-2 my-3">
+        <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+          <div class="mainflip">
+            <div class="frontside">
+              <div class="card">
+                <div class="card-body text-center">
+                  <p><img class=" img-fluid" src="./img/ruleta.jpg" alt="card image">
+                  </p>
+                  <h4 class="card-title">Sistema de martingala</h4>
+                  <p class="card-text">
+                    En este juego comienzas apostando $ 1 al rojo o negro. Si pierde, duplica su apuesta anterior;
+                    si ganas, apuestas $ 1 nuevamente. Continúa jugando hasta que haya ganado $ 10,
+                    o la apuesta exceda los $ 100.
+                  </p>
+                  <a href="#" class="btn btn-primary btn-sm"></a>
+                </div>
+              </div>
+            </div>
+            <div class="backside">
+              <div class="card">
+                <div class="card-body text-center mt-4">
+                  <h4 class="card-title">Sistema de martingala</h4>
+                  <h6 class="card-title">Resultados</h6>
+                  <p class="card-text" id="resultado3">Aún no hay resultados del juego. En el formulario de la parte
+                    superior ingrese los valores para empezar a ejecutar el juego.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ./Juego 3 -->
+
+      <!-- Juego 4 -->
+      <div class="col-xs-12 col-sm-6 col-md-4 my-3">
+        <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+          <div class="mainflip">
+            <div class="frontside">
+              <div class="card">
+                <div class="card-body text-center">
+                  <p><img class=" img-fluid" src="./img/ruleta.jpg" alt="card image">
+                  </p>
+                  <h4 class="card-title">Sistema Labouchere</h4>
+                  <p class="card-text">
+                    En este juego comienzas con la lista de números (1, 2, 3, 4).
+                    Usted apuesta la suma del primer y último número en rojo (inicialmente $ 5).
+                    Si gana, elimina el primer y el último número de la lista (por lo tanto,
+                    si gana su primera apuesta, la lista se convierte en (2,3)); de lo contrario,
+                    agrega la suma al final de su lista (por lo tanto, si pierde su primera apuesta,
+                    la lista se convierte en (1, 2, 3, 4, 5)). Repite este proceso hasta que su
+                    lista esté vacía o la apuesta supere los $ 100. Si solo queda un número en la lista,
+                    puede apostar ese número.
+                  </p>
+                  <a href="#" class="btn btn-primary btn-sm"></a>
+                </div>
+              </div>
+            </div>
+            <div class="backside">
+              <div class="card">
+                <div class="card-body text-center mt-4">
+                  <h4 class="card-title">Sistema Labouchere</h4>
+                  <h6 class="card-title">Resultados</h6>
+                  <p class="card-text" id="resultado4">Aún no hay resultados del juego. En el formulario de la parte
+                    superior ingrese los valores para empezar a ejecutar el juego.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ./Juego 4 -->
     </div>
   </div>
 
