@@ -12,49 +12,58 @@ $().ready(function () {
         // Juego a
         var resultado1 = obtenerResultado(repeticiones,
             () => juego1 === 1 ? apuestaRojoNegro(rojas) : apuestaRojoNegro(negras));
-        console.log('\n1. Apuesta al Rojo o Negro\n', resultado1);
+        // console.log('\n1. Apuesta al Rojo o Negro\n', resultado1);
         // Criterios de comparación
         var crt1Res1 = gananciasEsperadas(resultado1);
-        console.log('crt1Res1', crt1Res1);
         var crt2Res1 = proporcionGanar(resultado1);
-        console.log('crt2Res1', crt2Res1);
         var crt3Res1 = tiempoEsperado(resultado1);
-        console.log('crt3Res1', crt3Res1);
+        var crt4Res1 = maxPerdida(resultado1);
+        var crt5Res1 = maxGanancia(resultado1);
+        // Mostrando Resultado
+        var elemento1 = $('#resultado1');
+        mostrarResultado(elemento1, repeticiones, crt1Res1, crt2Res1, crt3Res1, crt4Res1, crt5Res1);
+
 
         // Juego b
         var resultado2 = obtenerResultado(repeticiones, () => apuestaUnNumero(juego2));
-        console.log('2. Apuesta un Número\n', resultado2);
+        // console.log('2. Apuesta un Número\n', resultado2);
         // Criterios de comparación
         var crt1Res2 = gananciasEsperadas(resultado2);
-        console.log('crt1Res2', crt1Res2)
         var crt2Res2 = proporcionGanar(resultado2);
-        console.log('crt2Res2', crt2Res2);
         var crt3Res2 = tiempoEsperado(resultado2);
-        console.log('crt3Res2', crt3Res2);
+        var crt4Res2 = maxPerdida(resultado2);
+        var crt5Res2 = maxGanancia(resultado2);
+        // Mostrando Resultado
+        var elemento2 = $('#resultado2');
+        mostrarResultado(elemento2, repeticiones, crt1Res2, crt2Res2, crt3Res2, crt4Res2, crt5Res2);
 
         // Juego c
         var resultado3 = obtenerResultado(repeticiones,
             () => juego3 === 1 ? apuestaMartingala(rojas) : apuestaMartingala(negras));
-        console.log('3. Apuesta de Martingala\n', resultado3);
+        // console.log('3. Apuesta de Martingala\n', resultado3);
         // Criterios de comparación
         var crt1Res3 = gananciasEsperadas(resultado3);
-        console.log('crt1Res3', crt1Res3);
         var crt2Res3 = proporcionGanar(resultado3);
-        console.log('crt2Res3', crt2Res3);
         var crt3Res3 = tiempoEsperado(resultado3);
-        console.log('crt3Res3', crt3Res3);
+        var crt4Res3 = maxPerdida(resultado3);
+        var crt5Res3 = maxGanancia(resultado3);
+        // Mostrando Resultado
+        var elemento3 = $('#resultado3');
+        mostrarResultado(elemento3, repeticiones, crt1Res3, crt2Res3, crt3Res3, crt4Res3, crt5Res3);
 
         // Juego d
         var resultado4 = obtenerResultado(repeticiones,
             () => juego4 === 1 ? apuestaLabouchere(rojas, juego4_lista) : apuestaLabouchere(negras, juego4_lista));
-        console.log('4. Apuesta de Labouchere\n', resultado4);
+        // console.log('4. Apuesta de Labouchere\n', resultado4);
         // Criterios de comparación
         var crt1Res4 = gananciasEsperadas(resultado4);
-        console.log('crt1Res4', crt1Res4);
         var crt2Res4 = proporcionGanar(resultado4);
-        console.log('crt2Res4', crt2Res4);
         var crt3Res4 = tiempoEsperado(resultado4);
-        console.log('crt3Res4', crt3Res4);
+        var crt4Res4 = maxPerdida(resultado4);
+        var crt5Res4 = maxGanancia(resultado4);
+        // Mostrando Resultado
+        var elemento4 = $('#resultado4');
+        mostrarResultado(elemento4, repeticiones, crt1Res4, crt2Res4, crt3Res4, crt4Res4, crt5Res4);
     });
 });
 
@@ -149,12 +158,25 @@ function tiempoEsperado(resultado) {
     return average(resultado.map(x => x.nroApuestas));
 }
 
-// La cantidad máxima que puede perder
+// La cantidad máxima que puedes perder
 function maxPerdida(resultado) {
-
+    return Math.min(...resultado.map(x => x.ganancia));
 }
 
 // La cantidad máxima que puedes ganar
 function maxGanancia(resultado) {
+    return Math.max(...resultado.map(x => x.ganancia));
+}
 
+/*
+    Mostrando los resultados de los criterios de comparación
+*/
+function mostrarResultado(elemento, repeticiones, crt1, crt2, crt3, crt4, crt5) {
+    var html = `<small><b>${repeticiones} ${(repeticiones > 1) ? `repeticiones` : `repetición`}</b></small><br>`;
+    html += `<span>Ganancia Esperada: </span><b>$ ${redondear(crt1, 2)}</b><br>`;
+    html += `<span>Proporcion de juegos Ganados: </span><b>${crt2} de ${repeticiones}</b><br>`;
+    html += `<span>Tiempo de juego Esperado: </span><b>${crt3} ${(crt3 > 1) ? `apuestas` : `apuesta`}</b><br>`;
+    html += `<span>Cantidad máxima que se puede perder: </span><b>$ ${redondear(crt4, 2)}</b><br>`;
+    html += `<span>Cantidad máxima que se puede ganar: </span><b>$ ${redondear(crt5, 2)}</b>`;
+    elemento.html(html);
 }
