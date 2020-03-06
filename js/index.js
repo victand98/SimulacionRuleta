@@ -120,11 +120,57 @@ function apuestaMartingala(conjunto) {
 }
 
 // 4. Apuesta mediante el sistema de Labouchere
-function apuestaLabouchere(conjunto, lista) {
-    // Código aquí
+function apuestaLabouchere() {
 
-    return { ganancia: 0, nroApuestas: 0 }
+    var al = [];
+    var ganadas = 0;   
+    var rnumber = [];
+        
+    for (var i = 0; i < 100000; i++) {
+       rnumber.push(Math.random());
+     }
+        var ganancia = 0;
+        var i = 1;
+        al.push(1);
+        al.push(2);
+        al.push(3);
+        al.push(4);
+        
+        
+        while(al.length>=1 || ganancia<=100 ){
+            var apuesta = 0; 
+            if (al.length ==1) {
+                apuesta = al[0];
+            } else{
+                apuesta = al[0] + al[al.length - 1];
+            }
+            if(rnumber[i]>0.5){
+                if (al.length == 1) {
+                    al.remove[0];
+                    ganancia = ganancia + apuesta;
+                    break;
+                }else{
+                    if (al.length ==2) {
+                         al.remove[0];
+                         al.remove[al.length - 1];
+                         ganancia = ganancia + apuesta;
+                         break;
+                    }
+                    else{
+                        al.remove[0];
+                        al.remove[al.length - 1];
+                    }
+                }
+              
+               ganancia = ganancia + apuesta;
+            }else{
+                al.add[apuesta];
+            }
+            i++;
+        }
+    return { ganancia: ganancia, nroApuestas: i }
 }
+
 
 
 /*
