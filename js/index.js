@@ -2,12 +2,12 @@ $().ready(function () {
     $("#form").submit(e => {
         e.preventDefault();
         // Recogiendo Datos del formulario
-        var juego1 = parseInt($('#juego1').val());
-        var juego2 = parseInt($('#juego2').val());
-        var juego3 = parseInt($('#juego3').val());
-        var juego4 = parseInt($('#juego4').val());
-        var juego4_lista = $('#juego4_lista').val().map(x => parseInt(x));
-        var repeticiones = parseInt($('#repeticiones').val());
+        const juego1 = parseInt($('#juego1').val());
+        const juego2 = parseInt($('#juego2').val());
+        const juego3 = parseInt($('#juego3').val());
+        const juego4 = parseInt($('#juego4').val());
+        const juego4_lista = $('#juego4_lista').val();
+        const repeticiones = parseInt($('#repeticiones').val());
 
         // Juego a
         var resultado1 = obtenerResultado(repeticiones,
@@ -81,7 +81,6 @@ const negras = [2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 
 
 // 1. Apuesta al Rojo
 function apuestaRojoNegro(conjunto) {
-    // Código aquí
     var ganancia = 0;
     var resultado = getRandomResult(0, 37);
     if (conjunto.indexOf(resultado) < 0) ganancia--;
@@ -91,7 +90,6 @@ function apuestaRojoNegro(conjunto) {
 
 // 2. Apuesta por un número
 function apuestaUnNumero(numero) {
-    // Código aquí
     var ganancia = 0;
     var resultado = getRandomResult(0, 37);
     if (resultado != numero) ganancia--;
@@ -101,10 +99,9 @@ function apuestaUnNumero(numero) {
 
 // 3. Apuesta mediante el sistema de Martingala
 function apuestaMartingala(conjunto) {
-    // Código aquí
     var apuesta = 1;
     var ganancia = 0;
-    var nroApuestas = 0;
+    var nroApuestas = 1;
     for (nroApuestas; apuesta <= 100; nroApuestas++) {
         var resultado = getRandomResult(0, 37);
         if (conjunto.indexOf(resultado) < 0) {
@@ -120,55 +117,26 @@ function apuestaMartingala(conjunto) {
 }
 
 // 4. Apuesta mediante el sistema de Labouchere
-function apuestaLabouchere() {
-
-    var al = [];
-    var ganadas = 0;   
-    var rnumber = [];
-        
-    for (var i = 0; i < 100000; i++) {
-       rnumber.push(Math.random());
-     }
-        var ganancia = 0;
-        var i = 1;
-        al.push(1);
-        al.push(2);
-        al.push(3);
-        al.push(4);
-        
-        
-        while(al.length>=1 || ganancia<=100 ){
-            var apuesta = 0; 
-            if (al.length ==1) {
-                apuesta = al[0];
-            } else{
-                apuesta = al[0] + al[al.length - 1];
-            }
-            if(rnumber[i]>0.5){
-                if (al.length == 1) {
-                    al.remove[0];
-                    ganancia = ganancia + apuesta;
-                    break;
-                }else{
-                    if (al.length ==2) {
-                         al.remove[0];
-                         al.remove[al.length - 1];
-                         ganancia = ganancia + apuesta;
-                         break;
-                    }
-                    else{
-                        al.remove[0];
-                        al.remove[al.length - 1];
-                    }
-                }
-              
-               ganancia = ganancia + apuesta;
-            }else{
-                al.add[apuesta];
-            }
-            i++;
+function apuestaLabouchere(conjunto, listaNumeros) {
+    var lista = listaNumeros.map(x => parseInt(x));
+    var apuesta = lista[0] + lista[lista.length - 1];
+    var ganancia = 0;
+    var nroApuestas = 1;
+    for (nroApuestas; apuesta <= 100; nroApuestas++) {
+        var resultado = getRandomResult(0, 37);
+        if (conjunto.indexOf(resultado) < 0) {
+            lista.push(apuesta);
+            ganancia -= apuesta;
+        } else {
+            ganancia += apuesta;
+            lista.shift();
+            lista.length >= 1 && lista.pop();
         }
-    return { ganancia: ganancia, nroApuestas: i }
+        if (lista.length > 0)
+            apuesta = lista[0] + lista[lista.length - 1];
+        else break;
+    }
+    return { ganancia: ganancia, nroApuestas: nroApuestas }
 }
 
 
@@ -222,7 +190,7 @@ function mostrarResultado(elemento, repeticiones, crt1, crt2, crt3, crt4, crt5) 
     html += `<span>Ganancia Esperada: </span><b>$ ${redondear(crt1, 2)}</b><br>`;
     html += `<span>Proporcion de juegos Ganados: </span><b>${crt2} de ${repeticiones}</b><br>`;
     html += `<span>Tiempo de juego Esperado: </span><b>${crt3} ${(crt3 > 1) ? `apuestas` : `apuesta`}</b><br>`;
-    html += `<span>Cantidad máxima que se puede perder: </span><b>$ ${redondear(crt4, 2)}</b><br>`;
-    html += `<span>Cantidad máxima que se puede ganar: </span><b>$ ${redondear(crt5, 2)}</b>`;
+    html += `<span>Cantidad máxima que se puede perder: </span><b>$ ${Math.sign(crt4) < 0 ? redondear(crt4, 2) : 0}</b><br>`;
+    html += `<span>Cantidad máxima que se puede ganar: </span><b>$ ${Math.sign(crt5) > 0 ? redondear(crt5, 2) : 0}</b>`;
     elemento.html(html);
 }
