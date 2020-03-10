@@ -9,3 +9,6 @@ const redondear = (number, decimals) => {
     var places = Math.pow(10, decimals);
     return Math.round(number * places) / places;
 }
+
+// Funcion para obtener la desviacion estandar
+const sd = (arr, avg) => Math.sqrt(arr.reduce((sq, n) => sq + Math.pow(n - avg, 2), 0) / (arr.length - 1));

@@ -19,9 +19,24 @@ $().ready(function () {
         var crt3Res1 = tiempoEsperado(resultado1);
         var crt4Res1 = maxPerdida(resultado1);
         var crt5Res1 = maxGanancia(resultado1);
+        // Desviación Estandar
+        var crt1Res1Sd = sdGananciasEsperadas(resultado1, crt1Res1);
+        var crt2Res1Sd = sdProporcionGanar(resultado1, crt2Res1);
+        var crt3Res1Sd = sdtiempoEsperado(resultado1, crt3Res1);
         // Mostrando Resultado
         var elemento1 = $('#resultado1');
-        mostrarResultado(elemento1, repeticiones, crt1Res1, crt2Res1, crt3Res1, crt4Res1, crt5Res1);
+        var datos1 = {
+            repeticiones,
+            crt1: crt1Res1,
+            crt2: crt2Res1,
+            crt3: crt3Res1,
+            crt4: crt4Res1,
+            crt5: crt5Res1,
+            crt1Sd: crt1Res1Sd,
+            crt2Sd: crt2Res1Sd,
+            crt3Sd: crt3Res1Sd
+        };
+        mostrarResultado(elemento1, datos1);
 
 
         // Juego b
@@ -33,9 +48,24 @@ $().ready(function () {
         var crt3Res2 = tiempoEsperado(resultado2);
         var crt4Res2 = maxPerdida(resultado2);
         var crt5Res2 = maxGanancia(resultado2);
+        // Desviación Estandar
+        var crt1Res2Sd = sdGananciasEsperadas(resultado2, crt1Res2);
+        var crt2Res2Sd = sdProporcionGanar(resultado2, crt2Res2);
+        var crt3Res2Sd = sdtiempoEsperado(resultado2, crt3Res2);
         // Mostrando Resultado
         var elemento2 = $('#resultado2');
-        mostrarResultado(elemento2, repeticiones, crt1Res2, crt2Res2, crt3Res2, crt4Res2, crt5Res2);
+        var datos2 = {
+            repeticiones,
+            crt1: crt1Res2,
+            crt2: crt2Res2,
+            crt3: crt3Res2,
+            crt4: crt4Res2,
+            crt5: crt5Res2,
+            crt1Sd: crt1Res2Sd,
+            crt2Sd: crt2Res2Sd,
+            crt3Sd: crt3Res2Sd
+        }
+        mostrarResultado(elemento2, datos2);
 
         // Juego c
         var resultado3 = obtenerResultado(repeticiones,
@@ -47,9 +77,24 @@ $().ready(function () {
         var crt3Res3 = tiempoEsperado(resultado3);
         var crt4Res3 = maxPerdida(resultado3);
         var crt5Res3 = maxGanancia(resultado3);
+        // Desviación Estandar
+        var crt1Res3Sd = sdGananciasEsperadas(resultado3, crt1Res3);
+        var crt2Res3Sd = sdProporcionGanar(resultado3, crt2Res3);
+        var crt3Res3Sd = sdtiempoEsperado(resultado3, crt3Res3);
         // Mostrando Resultado
         var elemento3 = $('#resultado3');
-        mostrarResultado(elemento3, repeticiones, crt1Res3, crt2Res3, crt3Res3, crt4Res3, crt5Res3);
+        var datos3 = {
+            repeticiones,
+            crt1: crt1Res3,
+            crt2: crt2Res3,
+            crt3: crt3Res3,
+            crt4: crt4Res3,
+            crt5: crt5Res3,
+            crt1Sd: crt1Res3Sd,
+            crt2Sd: crt2Res3Sd,
+            crt3Sd: crt3Res3Sd
+        }
+        mostrarResultado(elemento3, datos3);
 
         // Juego d
         var resultado4 = obtenerResultado(repeticiones,
@@ -61,9 +106,24 @@ $().ready(function () {
         var crt3Res4 = tiempoEsperado(resultado4);
         var crt4Res4 = maxPerdida(resultado4);
         var crt5Res4 = maxGanancia(resultado4);
+        // Desviación Estandar
+        var crt1Res4Sd = sdGananciasEsperadas(resultado4, crt1Res4);
+        var crt2Res4Sd = sdProporcionGanar(resultado4, crt2Res4);
+        var crt3Res4Sd = sdtiempoEsperado(resultado4, crt3Res4);
         // Mostrando Resultado
         var elemento4 = $('#resultado4');
-        mostrarResultado(elemento4, repeticiones, crt1Res4, crt2Res4, crt3Res4, crt4Res4, crt5Res4);
+        var datos4 = {
+            repeticiones,
+            crt1: crt1Res4,
+            crt2: crt2Res4,
+            crt3: crt3Res4,
+            crt4: crt4Res4,
+            crt5: crt5Res4,
+            crt1Sd: crt1Res4Sd,
+            crt2Sd: crt2Res4Sd,
+            crt3Sd: crt3Res4Sd
+        }
+        mostrarResultado(elemento4, datos4);
     });
 });
 
@@ -183,14 +243,34 @@ function maxGanancia(resultado) {
 }
 
 /*
+    Valores de desviación Estandar
+*/
+function sdGananciasEsperadas(resultado, promedio) {
+    return sd(resultado.map(x => x.ganancia > 0 ? x.ganancia : 0), promedio);
+}
+
+function sdProporcionGanar(resultado, promedio) {
+    return sd(resultado.map(x => x.ganancia > 0 ? 1 : 0), promedio / resultado.length);
+}
+
+function sdtiempoEsperado(resultado, promedio) {
+    return sd(resultado.map(x => x.nroApuestas), promedio);
+}
+
+/*
     Mostrando los resultados de los criterios de comparación
 */
-function mostrarResultado(elemento, repeticiones, crt1, crt2, crt3, crt4, crt5) {
+function mostrarResultado(elemento, datos) {
+    const { repeticiones, crt1, crt2, crt3, crt4, crt5,
+        crt1Sd, crt2Sd, crt3Sd } = datos;
     var html = `<small><b>${repeticiones} ${(repeticiones > 1) ? `repeticiones` : `repetición`}</b></small><br>`;
     html += `<span>Ganancia Esperada: </span><b>$ ${redondear(crt1, 2)}</b><br>`;
     html += `<span>Proporcion de juegos Ganados: </span><b>${crt2} de ${repeticiones}</b><br>`;
     html += `<span>Tiempo de juego Esperado: </span><b>${crt3} ${(crt3 > 1) ? `apuestas` : `apuesta`}</b><br>`;
     html += `<span>Cantidad máxima que se puede perder: </span><b>$ ${Math.sign(crt4) < 0 ? redondear(crt4, 2) : 0}</b><br>`;
-    html += `<span>Cantidad máxima que se puede ganar: </span><b>$ ${Math.sign(crt5) > 0 ? redondear(crt5, 2) : 0}</b>`;
+    html += `<span>Cantidad máxima que se puede ganar: </span><b>$ ${Math.sign(crt5) > 0 ? redondear(crt5, 2) : 0}</b><br><br>`;
+    html += `<span>Desv. estandar (Ganancia Esperada): </span><b>${redondear(crt1Sd, 2)}</b><br>`;
+    html += `<span>Desv. estandar (Prop. de juegos Ganados): </span><b>${redondear(crt2Sd, 2)}</b><br>`;
+    html += `<span>Desv. estandar (Tiempo de juego Esperado): </span><b>${redondear(crt3Sd, 2)}</b>`;
     elemento.html(html);
 }
